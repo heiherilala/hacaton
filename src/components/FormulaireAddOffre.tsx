@@ -3,18 +3,19 @@ import { Field, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { APIUrl, backgroundColor } from "../constants";
-import { JobOffer } from "../interfaces";
+import { Domain, JobOffer } from "../interfaces";
+import { postPutDeletRequest } from "../hoooks";
 interface props {
-  joboffer: JobOffer;
+  joboffer: JobOffer |undefined;
   id:number | null;
   fermetur:()=>void;
-  dataCompose:any[];
+  dataCompose:Domain[];
   change:any;
+  token:string | undefined;
 }
 
 const FormulaireAddOffre: React.FC<props> = (props) => {
-  const fermerFormulaire=()=>{setInterval(()=>{props.fermetur()},500); };
+  const fermerFormulaire=()=>{props.fermetur(); };
   const change = props.change;
   
   const [activ,setActiv] = useState(true)
@@ -40,22 +41,23 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
     },
     validationSchema: Yup.object({
       company: Yup.string()
-        .max(100, "Caractère inferieur ou egale à 100")
+        .max(50, "Caractère inferieur ou egale à 50")
         .required("Requis"),
       contract: Yup.string()
-        .max(100, "Caractère inferieur ou egale à 100")
+        .max(50, "Caractère inferieur ou egale à 50")
         .required("Requis"),
-      description: Yup.number()
-        .max(1000000, "Description trop élevé")
-        .required("Requis")
-        .typeError('Saisissez des chiffres'),
+      description: Yup.string()
+        .max(500, "Caractère inferieur ou egale à 500")
+        .required("Requis"),
       location: Yup.string()
-        .max(1000, "trop long"),
+        .max(50, "Caractère inferieur ou egale à 500")
+        .required("Requis"),
       domain: Yup.string()
-        .max(100, "Caractère inferieur ou egale à 100")
+        .max(50, "Caractère inferieur ou egale à 50")
         .required("Requis"),
       post: Yup.string()
-        .max(1000, "trop long"),
+        .max(50, "Caractère inferieur ou egale à 50")
+        .required("Requis"),
       profile: Yup.string()
         .max(100, "Caractère inferieur ou egale à 100")
         .required("Requis"),
@@ -63,23 +65,28 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
         .max(1000, "trop long"),
     }),
     onSubmit: (values) => {
-      console.log(values);
-      try {
-        axios[props.id==null?"post":"put"](APIUrl+"/joboffers"+(props.id==null?"":"/"+props.id), {
-          title: values.company,
-          contract: values.contract,
-          description: values.description,
-          location: values.location,
-          category: {
-            idCategory: props.dataCompose.find(e=>e.nameCategory==values.domain)?.idCategory
-          }
-        })
-        .then((response)=>{fermerFormulaire()})
-        .catch((error)=>{fermerFormulaire()})
-        ;
-      } catch (error) {
-        fermerFormulaire();
+
+      const objectData = {
+        reference: values.reference,
+        post: values.post,
+        profile: values.profile,
+        location: values.location,
+        description: values.description,
+        company: values.company,
+        contract: values.contract,
+        available:true,
+        domain: {
+          idDomain: props.dataCompose.find(e=>e.name==values.domain)?.idDomain
+        }
+      };
+      if (props.id==null) {
+        console.log("Start POST");
+        postPutDeletRequest("/job-offers",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
+      }else{
+        console.log("Start PUT");
+        postPutDeletRequest("/job-offers/"+props.id,objectData,null,false,true,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
       }
+      
     },
   });
 
@@ -87,8 +94,9 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
   if (true) {
     return (
       <>
-        <div className="fonds2" onClick={()=>{props.fermetur()}}></div>
+
         <div className="fonds">
+        <div className="fonds2" onClick={()=>{props.fermetur()}}></div>
           <div className="form_fondsDrink">
             <button className="btn_cancel" onClick={()=>{props.fermetur()}}>
               X
@@ -104,18 +112,18 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
             >
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                  company
+                  Company
                 </label>
                 <input
                   id="company"
                   type="text"
                   className="input_formulaire"
-                  placeholder="Titre du Livre"
+                  placeholder="Votre company"
                   value={formik.values.company}
                   onChange={formik.handleChange}
                 />
                 {formik.errors.company ? (
-                  <p> {"formik.errors.company"} </p>
+                  <p> {formik.errors.company} </p>
                 ) : null}
               </div>
 
@@ -123,14 +131,22 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                 <label htmlFor="id" className="label_input">
                 contract
                 </label>
-                <input
+
+                <select
                   id="contract"
-                  type="text"
                   className="input_formulaire"
-                  placeholder="Auteur"
+                  placeholder="contract"
                   value={formik.values.contract}
                   onChange={formik.handleChange}
-                />
+                >
+                    <option value={"CDI"} label={"CDI"}>
+                      {"CDI"}
+                    </option>
+                    <option value={"CDD"} label={"CDD"}>
+                      {"CDD"}
+                    </option>
+                </select>
+
                 {formik.errors.contract ? <p> {formik.errors.contract} </p> : null}
               </div>
 
@@ -142,10 +158,11 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                   id="description"
                   type="text"
                   className="input_formulaire"
-                  placeholder="Le nombre de page"
+                  placeholder="Une description?"
                   value={formik.values.description}
                   onChange={formik.handleChange}
                 />
+                
                 {formik.errors.description ? <p> {formik.errors.description} </p> : null}
               </div>
 
@@ -165,7 +182,6 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                 {formik.errors.location ? <p> {formik.errors.location} </p> : null}
               </div>
 
-
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
                 post
@@ -174,14 +190,13 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                   id="post"
                   type="textarea"
                   className="input_formulaire bigText"
-                  placeholder="post"
+                  placeholder="quelle post?"
                   value={formik.values.post}
                   onChange={formik.handleChange}
                 />
                 
                 {formik.errors.post ? <p> {formik.errors.post} </p> : null}
               </div>
-
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
@@ -191,7 +206,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                   id="profile"
                   type="textarea"
                   className="input_formulaire bigText"
-                  placeholder="profile"
+                  placeholder="profile rechercher"
                   value={formik.values.profile}
                   onChange={formik.handleChange}
                 />
@@ -199,20 +214,23 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                 {formik.errors.profile ? <p> {formik.errors.profile} </p> : null}
               </div>
 
-
-
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
                 domain
                 </label>
-                <input
+                <select
                   id="domain"
-                  type="textarea"
-                  className="input_formulaire bigText"
+                  className="input_formulaire"
                   placeholder="domain"
                   value={formik.values.domain}
                   onChange={formik.handleChange}
-                />
+                >
+                  {props.dataCompose.map((donne)=>{return(
+                    <option value={donne.name} label={donne.name}>
+                      {donne.name}
+                    </option>
+                  )})}
+                </select>
                 
                 {formik.errors.domain ? <p> {formik.errors.domain} </p> : null}
               </div>
@@ -233,19 +251,6 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
                 
                 {formik.errors.reference ? <p> {formik.errors.reference} </p> : null}
               </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
               <button type="submit" className={"btn_envoie btn_type "}>
                 {props.id==null?"Ajouter":"Modifier"}

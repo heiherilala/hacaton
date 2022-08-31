@@ -85,11 +85,6 @@ import axios from 'axios';
                           CONNEXION
                       </Button>
                       <div className="col-3"></div>
-                      <div className="col-3"></div>
-                      <Button className="col-6 custom_color" onClick={(e)=>{navigate()}}>
-                          S'INSCRIR
-                      </Button>
-                      <div className="col-3"></div>
                   </Form.Group>
               </Form>
             </div>

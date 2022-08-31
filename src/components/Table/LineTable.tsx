@@ -4,22 +4,24 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { backgroundColor, APIUrl, variant } from '../../constants';
 import { postPutDeletRequest } from '../../hoooks';
-import { Domain } from '../../interfaces';
+import { Domain, JobOffer } from '../../interfaces';
 import ConfirmDispo from '../ConfirmDispo';
 import Formulaire from '../Formulaire';
+import FormulaireAddOffre from '../FormulaireAddOffre';
 import Load from '../Loading';
 
 
 
 interface props{
     idLine: any;
-    item: any;
+    item: JobOffer;
     actualisationAllData: () => void;
     bouttons:{name:string,method:(object:object)=>void}[]|null
     keFocus:{place: [number, number | null, number | null],funcion: (a: any) => any}[]
     takeVauleObjectByNumber:(n: [number, number | null, number | null], o: Object) => string
     dataCompose:Domain[]
     delet:boolean
+    token: string|undefined
   }
 
 export const LigneList:React.FC<props> = (props) => {
@@ -33,22 +35,22 @@ export const LigneList:React.FC<props> = (props) => {
 
 
     const [activLoading,setActivLoading]= useState<boolean>(false)
+    const [activModif,setActivModif]= useState<boolean>(false)
+    const [activModifPut,setActivModifPut]= useState<boolean>(false)
+
     const startSctivLoading =()=> setActivLoading(true);
     const finishLoadingt:()=>void = ()=>{
-        props.actualisationAllData();
         const temer1 = setInterval(()=>{
             setActivModif(false);
             setActivLoading(false);
-        },500)
-    }
-    const [activModif,setActivModif]= useState<boolean>(false)
-    const finishUpdatPut:()=>void = ()=>{
+            setActivModifPut(false);
+            clearInterval(temer1);
+        },500);
         props.actualisationAllData();
-        const temer1 = setInterval(()=>{
-            setActivModif(false);
-            setActivLoading(false);
-        },100)
+
     }
+    
+
 
     
 
@@ -72,7 +74,7 @@ export const LigneList:React.FC<props> = (props) => {
                 }
                 {((props.delet))?
                     <td>
-                                <button onClick={()=>{setActivModif(true);}} type="button" className={"btn custom_color_1"}><i className="bi bi-trash-fill "></i></button>
+                                <button onClick={()=>{setActivModifPut(true);}} type="button" className={"btn custom_color_1"}><i className="bi bi-pencil-square"></i></button>
                     </td>:<></>
                 }
             </tr>
@@ -81,12 +83,33 @@ export const LigneList:React.FC<props> = (props) => {
                 joboffer = {item}
                 finish = {()=>{setActivModif(false)}}
                 function = {()=>{
-                    bouttons!=null?bouttons[0].method({data:item,functionIfTrue:setActivModif(false),functionIfFalse:setActivModif(false),token:"",startSctivLoading:startSctivLoading}):console.log("")
+                    const newValue = {
+                        reference: item.reference,
+                        post: item.post,
+                        profile: item.profile,
+                        location: item.location,
+                        description: item.description,
+                        company: item.company,
+                        contract: item.contract,
+                        available:!item.available,
+                        domain: {
+                          idDomain: item.domain?.idDomain
+                        }
+                    }
+                    postPutDeletRequest("/job-offers/"+item.idJobOffer,newValue,null,false,true,()=>finishLoadingt(),()=>()=>{setActivModif(false)},props.token);
                 }
             }
             />:<></>}
+            {activModifPut?<div className='fonds3'><FormulaireAddOffre
+                joboffer = {item} //: joboffer | undefined;
+                id = {idLine} //:number | null;
+                fermetur = {finishLoadingt} //:()=>void;
+                dataCompose = {props.dataCompose} //:category[];
+                change = {4} //:any;
+                token = {props.token}
+          /></div>:<></>}
 
-            {activLoading?Load(finishLoadingt):<></>}
+            {activLoading?Load(()=> {props.actualisationAllData();setActivModifPut(false)}):<></>}
         </>
     );
 };

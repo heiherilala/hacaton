@@ -21,7 +21,7 @@ const ConfirmDispo: React.FC<props> = (props) => {
           <h3> <span className='entete_text'>reference : </span>{props.joboffer.reference}</h3>
           <p><span className='entete_text'>post : </span>{props.joboffer.post}</p>
           <p><span className='entete_text'>company : </span> {props.joboffer.company}</p>
-          <p><span className='entete_text'>contract : </span>{props.joboffer.contract} Pages</p>
+          <p><span className='entete_text'>contract : </span>{props.joboffer.contract}</p>
           <p><span className='entete_text'>profile : </span> {props.joboffer.profile}</p>
 
         </Modal.Body>

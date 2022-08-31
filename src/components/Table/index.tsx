@@ -156,6 +156,7 @@ export const TableConstructor: React.FC<props> = (props) => {
                     takeVauleObjectByNumber={takeVauleObjectByNumber}// :(n: [number, number | null, number | null], o: Object) => string
                     dataCompose={dataCompose}
                     delet={props.delet}
+                    token={myToken}
                   />
                 );
             })}
@@ -177,13 +178,14 @@ export const TableConstructor: React.FC<props> = (props) => {
         </nav>
       </div>
       
-      {/*activUpdatePost?<FormulaireAddOffre
+      {activUpdatePost?<FormulaireAddOffre
       joboffer = {undefined} //: joboffer | undefined;
       id = {null} //:number | null;
       fermetur = {finishUpdatPost} //:()=>void;
       dataCompose = {dataCompose} //:category[];
       change = {4} //:any;
-          />:<></>*/}
+      token = {myToken}
+          />:<></>}
     {activLoading?Load(finishLoadingt):<></>}
     </div>
   );
