@@ -66,6 +66,7 @@ export const TableConstructor: React.FC<props> = (props) => {
     axiosGget("/joboffers/count",myToken,setLongPage,null,null)
   }, [loadlongPage])
 
+
   const [tri, setTri] = useState("");
   let items = [newJobOffer];
 

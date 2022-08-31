@@ -14,7 +14,7 @@ const BooksClass: React.FC<props> = (props) => {
 
 
 const takeName = (a:boolean)=>{
-  if (a) {
+  if (a==true) {
     return "disponible"
   }else{
     return "indisponible"
