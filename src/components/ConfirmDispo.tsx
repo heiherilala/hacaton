@@ -9,7 +9,7 @@ interface props {
   function:()=>void;
 }
 
-const ConfirmEmprunt: React.FC<props> = (props) => {
+const ConfirmDispo: React.FC<props> = (props) => {
 
   return (
     <>
@@ -18,11 +18,11 @@ const ConfirmEmprunt: React.FC<props> = (props) => {
           <Modal.Title>Confirmation des changements</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h3> <span className='entete_text'>Titre : </span>{props.joboffer.title}</h3>
-          <p><span className='entete_text'>Auteur : </span>{props.joboffer.author}</p>
-          <p><span className='entete_text'>Categorie : </span> {props.joboffer.category.nameCategory}</p>
-          <p><span className='entete_text'>Nombre de page : </span>{props.joboffer.pages} Pages</p>
-          <p><span className='entete_text'>Synopsis : </span> {props.joboffer.synopsis}</p>
+          <h3> <span className='entete_text'>reference : </span>{props.joboffer.reference}</h3>
+          <p><span className='entete_text'>post : </span>{props.joboffer.post}</p>
+          <p><span className='entete_text'>company : </span> {props.joboffer.company}</p>
+          <p><span className='entete_text'>contract : </span>{props.joboffer.contract} Pages</p>
+          <p><span className='entete_text'>profile : </span> {props.joboffer.profile}</p>
 
         </Modal.Body>
         <Modal.Footer>
@@ -38,4 +38,4 @@ const ConfirmEmprunt: React.FC<props> = (props) => {
   );
 }
 
-export default ConfirmEmprunt;
+export default ConfirmDispo;

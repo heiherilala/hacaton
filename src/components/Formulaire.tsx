@@ -5,7 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { APIUrl, backgroundColor } from "../constants";
 interface props {
-  book: any;
+  joboffer: any;
   id:number | null;
   fermetur:()=>void;
   dataCompose:any[];
@@ -30,14 +30,14 @@ const Formulaire: React.FC<props> = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      nameBook: (props.book==undefined?"":props.book.title),
-      author: (props.book==undefined?"":""+props.book.author),
-      pages: (props.book==undefined?"":""+props.book.pages),
-      categorie: (props.book==undefined?"Comedy":props.book.category?.nameCategory),
-      synopsis: (props.book==undefined?"":""+props.book.synopsis),
+      nameJobOffer: (props.joboffer==undefined?"":props.joboffer.title),
+      author: (props.joboffer==undefined?"":""+props.joboffer.author),
+      pages: (props.joboffer==undefined?"":""+props.joboffer.pages),
+      categorie: (props.joboffer==undefined?"Comedy":props.joboffer.category?.nameCategory),
+      synopsis: (props.joboffer==undefined?"":""+props.joboffer.synopsis),
     },
     validationSchema: Yup.object({
-      nameBook: Yup.string()
+      nameJobOffer: Yup.string()
         .max(100, "Caractère inferieur ou egale à 100")
         .required("Requis"),
       author: Yup.string()
@@ -56,8 +56,8 @@ const Formulaire: React.FC<props> = (props) => {
     onSubmit: (values) => {
       console.log(values);
       try {
-        axios[props.id==null?"post":"put"](APIUrl+"/books"+(props.id==null?"":"/"+props.id), {
-          title: values.nameBook,
+        axios[props.id==null?"post":"put"](APIUrl+"/joboffers"+(props.id==null?"":"/"+props.id), {
+          title: values.nameJobOffer,
           author: values.author,
           pages: values.pages,
           synopsis: values.synopsis,
@@ -98,15 +98,15 @@ const Formulaire: React.FC<props> = (props) => {
                   Titre
                 </label>
                 <input
-                  id="nameBook"
+                  id="nameJobOffer"
                   type="text"
                   className="input_formulaire"
                   placeholder="Titre du Livre"
-                  value={formik.values.nameBook}
+                  value={formik.values.nameJobOffer}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.nameBook ? (
-                  <p> {"formik.errors.nameBook"} </p>
+                {formik.errors.nameJobOffer ? (
+                  <p> {"formik.errors.nameJobOffer"} </p>
                 ) : null}
               </div>
 

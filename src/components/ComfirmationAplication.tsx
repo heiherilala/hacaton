@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { FormulaireAplication } from '.';
 
@@ -23,9 +24,9 @@ const ConfirmAplication: React.FC<props> = (props) => {
           <p><span className='entete_text'>Lieu d'exécution : </span>{props.item.location}</p>
         </div>
         <div>
-          <button className='custom_color_accept' onClick={()=>{setActivFrom(true)}}>
+        <Button className='custom_color_accept ' onClick={()=>{setActivFrom(true)}}>
             Voir l'annonce
-          </button>
+          </Button>
         </div>
       </div>
       {activFrom?<>

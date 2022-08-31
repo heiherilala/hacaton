@@ -53,22 +53,18 @@ import { Application, JobOffer } from '../interfaces';
     <>
         {NavbarHeader(
             [
-                {name:"Listes des offres d’emplois",href: (ProjectUrl + "/BooksClass")},
-                {name:"Listes des offres d’emplois",href: (ProjectUrl + "/Ranking")}
+                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/BooksClass")},
+                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/Ranking")}
             ],
             {name:"Offre d’emploi",href: (ProjectUrl + "/")}
         )}
         {
-        <div className=" contereAllLanding d-flex flex-column bd-highlight mb-3" style={{
-          backgroundImage: 'url('+background+')',
-          backgroundSize: "cover",
-          height: "100vh",
-        }}>
+        <div className=" contereAllLanding d-flex flex-column bd-highlight mb-3" >
 
 
-                <div className="p-2 landing-list marging-top">
+                <div className="p-2 landing-list">
 
-                        <p>VOUS ETES A LA RECHERCHE D'EMPLOIS? VOICI LES OFFRE D'ACTUALITE</p>
+                        <p className="landing-list-text">VOUS ETES A LA RECHERCHE D'emploi? VOICI LES OFFRES D'ACTUALITE</p>
 
                     <div className="landing-list-children1">
                         <button className="landing-list-children2-move">
@@ -85,10 +81,10 @@ import { Application, JobOffer } from '../interfaces';
                     </div>
                 </div>
                 <div className="p-2 landing-list">
-                    <p>Le savier-vous? Les métier les plus recherché chéz nous se trouvent dans le domaine de : INFORMATIQUE (10 candidatures)</p>
+                    <p>Le saviez-vous? Les métiers les plus recherché chez nous se trouvent dans le domaine de : INFORMATIQUE (10 candidatures)</p>
                 </div>
                 <div className="p-2 landing-list">
-                    <p>VOUS ETES RECRUTEURS? CONTACTEZ-NOUS POUR QUE NOUS METTONS AVANT VOTRE OFFRE</p>
+                    <p>VOUS ETES RECRUTEURS? CONTACTEZ-NOUS POUR QUE NOUS METTONS EN AVANT VOTRE OFFRE</p>
                     <div className="landing-list2-children1">
                         <div className="landing-list2-children2">
                             <h2>TELEPHONE</h2>

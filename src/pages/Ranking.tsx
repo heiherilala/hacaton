@@ -23,7 +23,7 @@ const Ranking: React.FC<props> = (props) => {
             actualisationAllData={props.actualisationAllData}
             setActivUpdat={props.setActivUpdat}
             colloneName= {["Rang","Titre",'Auteur','Nombre de page',"Nombre d'emprunts"]}
-            keFocus={[[8,null,null],[1,null,null],[2,null,null],[3,null,null],[7,null,null]]}
+            keFocus={[{place:[1,null,null],funcion:(a:any)=>{return a}},{place:[9,1,null],funcion:(a:any)=>{return a}},{place:[2,null,null],funcion:(a:any)=>{return a}},{place:[8,null,null],funcion:(a:any)=>{return a}}]}
             bouttons={null}
             title={"Classement des livres par nombre d’emprunts"}
             delet={false}

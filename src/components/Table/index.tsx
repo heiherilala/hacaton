@@ -7,6 +7,7 @@ import { axiosGetWithPage, axiosGget, getCurrentUser, logout, takeKeyObjectByNum
 import EventBus from "../../hoooks/EventBus";
 import {  Domain, objectIUser } from "../../interfaces";
 import Formulaire from "../Formulaire";
+import FormulaireAddOffre from "../FormulaireAddOffre";
 import Load from "../Loading";
 import Arrow from "./Arrow";
 import { LigneList } from "./LineTable";
@@ -19,7 +20,7 @@ interface props {
   actualisationAllData:() => void;
   setActivUpdat: React.Dispatch<React.SetStateAction<boolean>>;
   colloneName: string[];
-  keFocus:[number, number | null, number | null][];
+  keFocus:{place:[number, number | null, number | null],funcion:(a:any)=>any}[];//{place:[1,null,null],funcion:(a:any)=>{return a}}
   bouttons:{name:string,method:(object:object)=>void}[]|null;
   title:string;
   delet:boolean;
@@ -34,13 +35,13 @@ export const TableConstructor: React.FC<props> = (props) => {
   const [myToken,setMyToken] = useState<string>()
   const [longPage, setLongPage] = useState<number>(105);
   const [loadlongPage, setloadLongPage] = useState<number>(0);
-  const [dataBook, setDataBook] = useState<any[]>([newJobOffer]);
-  const [loagBook, setLoagBook] = useState<number>(0);
+  const [dataJobOffer, setDataJobOffer] = useState<any[]>([newJobOffer]);
+  const [loagJobOffer, setLoagJobOffer] = useState<number>(0);
   const [dataCompose, setDataCompose] = useState<Domain[]>([]);
   const [loadDataCompose, setLoadDataCompose] = useState<number>(0);
 
   const finishLoadingt = ()=>{setActivLoading(false)};
-  const actualisationAllData =()=>{setLoagBook(loagBook+1);console.log("UPDATEEEEEEEEEEEEEEEEEEEEEEEEE");};
+  const actualisationAllData =()=>{setLoagJobOffer(loagJobOffer+1);console.log("UPDATEEEEEEEEEEEEEEEEEEEEEEEEE");};
   const finishUpdatPost:()=>void = ()=>{const timer=setInterval(()=>{setActivUpdatePost(false);clearInterval(timer)},300); actualisationAllData()}
 
   useEffect(() => {
@@ -53,29 +54,29 @@ export const TableConstructor: React.FC<props> = (props) => {
 
   useEffect(() => {
     setActivLoading(true)
-    axiosGetWithPage("/books",page,valuNumbur,myToken,setDataBook,()=>{setActivLoading(false)},null)
-  }, [loagBook,page,valuNumbur,myToken])
+    axiosGetWithPage("/job-offers",page,valuNumbur,myToken,setDataJobOffer,()=>{setActivLoading(false)},null)
+  }, [loagJobOffer,page,valuNumbur,myToken])
 
   useEffect(() => {
     setActivLoading(true)
-    axiosGget("/categories",myToken,setDataCompose,()=>{setActivLoading(false)},null)
+    axiosGget("/domains",myToken,setDataCompose,()=>{setActivLoading(false)},null)
   }, [loadDataCompose])
 
   useEffect(() => {
-    axiosGget("/books/count",myToken,setLongPage,null,null)
+    axiosGget("/joboffers/count",myToken,setLongPage,null,null)
   }, [loadlongPage])
 
   const [tri, setTri] = useState("");
   let items = [newJobOffer];
 
-    items = dataBook;
+    items = dataJobOffer;
 
   const colloneName: string[] = props.colloneName;
-  const keFocus:[number, number | null, number | null][] = props.keFocus
+  const keFocus = props.keFocus
   const [bouttons] = useState(props.bouttons);
 
   return (
-    <div className="d-flex flex-column mb-3 ForcedFisplayColone">
+    <div className="d-flex flex-column mb-3 ForcedFisplayColone marging-top">
       <h2 className="titleCoctail"> {props.title} </h2>
       <div className="dataTable-header p-2">
         <div className="dataTable-dropdown">
@@ -111,7 +112,7 @@ export const TableConstructor: React.FC<props> = (props) => {
               {colloneName.map((value,key)=>{return(
                   <th
                   onClick={() => {
-                    setTri(takeKeyObjectByNumber(keFocus[key],items[0]));
+                    setTri(takeKeyObjectByNumber(keFocus[key].place,items[0]));
                     let newValue = [false,false,false,false,false,false,false,false,false,false];
                     newValue[key] = true;
                     setActivTri(newValue);
@@ -129,7 +130,7 @@ export const TableConstructor: React.FC<props> = (props) => {
             {colloneName.map((value,key)=>{return(
                   <th
                   onClick={() => {
-                    setTri(takeKeyObjectByNumber(keFocus[key],items[0]));
+                    setTri(takeKeyObjectByNumber(keFocus[key].place,items[0]));
                     let newValue = [false,false,false,false,false,false,false,false,false,false];
                     newValue[key] = true;
                     setActivTri(newValue);
@@ -169,19 +170,20 @@ export const TableConstructor: React.FC<props> = (props) => {
             Math.min(page * valuNumbur, items.length) +
             " sur " +
             items.length +
-            " livres"}
+            " données"}
         </div>
         <nav className="dataTable-pagination">
           {HorizontalPagination(longPage, valuNumbur, page, setPage, tri)}
         </nav>
       </div>
-      {activUpdatePost?<Formulaire
-      book = {undefined} //: book | undefined;
+      
+      {/*activUpdatePost?<FormulaireAddOffre
+      joboffer = {undefined} //: joboffer | undefined;
       id = {null} //:number | null;
       fermetur = {finishUpdatPost} //:()=>void;
       dataCompose = {dataCompose} //:category[];
       change = {4} //:any;
-    />:<></>}
+          />:<></>*/}
     {activLoading?Load(finishLoadingt):<></>}
     </div>
   );

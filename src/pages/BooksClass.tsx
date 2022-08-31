@@ -13,7 +13,13 @@ interface props{
 const BooksClass: React.FC<props> = (props) => {
 
 
-
+const takeName = (a:boolean)=>{
+  if (a) {
+    return "disponible"
+  }else{
+    return "indisponible"
+  }
+}
 
 
 
@@ -32,13 +38,13 @@ const BooksClass: React.FC<props> = (props) => {
             items={props.items}
             actualisationAllData={props.actualisationAllData}
             setActivUpdat={props.setActivUpdat}
-            colloneName= {["Titre","Auteur",'Catégorie','Nombre de page']}
-            keFocus={[[1,null,null],[2,null,null],[5,1,null],[3,null,null]]}
+            colloneName= {["Référence","Domaine",'Poste','Statut']}
+            keFocus={[{place:[1,null,null],funcion:(a:any)=>{return a}},{place:[9,1,null],funcion:(a:any)=>{return a}},{place:[2,null,null],funcion:(a:any)=>{return a}},{place:[8,null,null],funcion:takeName}]}
             bouttons={[
-              {name:"Emprunter",method:((book:any)=>{postPutDeletRequest("books",book.data,1,false,false,book.functionIfTrue,book.functionIfFalse,book.token)})},
-              {name:"Rendre",method:((book:any)=>{postPutDeletRequest("books",book.data,1,false,false,book.functionIfTrue,book.functionIfFalse,book.token)})},
+              {name:"disponible",method:((book:any)=>{postPutDeletRequest("books",book.data,1,false,false,book.functionIfTrue,book.functionIfFalse,book.token)})},
+              {name:"indisponible",method:((book:any)=>{postPutDeletRequest("books",book.data,1,false,false,book.functionIfTrue,book.functionIfFalse,book.token)})},
             ]}
-            title={"Liste des Livres"}
+            title={"Listes des offres d’emplois"}
             delet={true}
           />
           </div>

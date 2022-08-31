@@ -1,7 +1,6 @@
 @import './variable.scss';
 
 
-
 /* star real css*/
 .marging-top{
   margin-top: 1em !important;
@@ -12,47 +11,70 @@
 }
 .landing-list{
   @include dispay-flex(column, center);
-  background-color: $color_variant_standard;
-  color: color_font($color_variant_standard) !important;
-  border-top: solid 3px black ;
-  width: 80%;
+  background-color: $color_background_ligtht;
+  color: color_font($color_background_ligtht) !important;
   
+  width: 100%;
+}
+.landing-list-text{
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-size: larger!important;
 }
 .landing-list-children1{
   @include dispay-flex(row, space-between);
-  width: 90%;
-  background-color: aqua;
+  width: 100%;
+  background-color: rgba(0, 255, 255, 0);
   border: 1px black;
 }
 .landing-list-children2{
   @include dispay-flex(column, start);
   height: 20em;
   margin: 1em !important;
-  background-color: rgb(25, 0, 255);
+  padding: 1em!important;
+  background-color: rgb(208, 212, 216);
+  
   width: 20%;
-  border: 1px black solid;
+  min-width: 280px;
+  /*border: 1px black solid;*/
+  border-radius: 10px
 }
+.landing-list-children2 h3{
+  font-weight: bolder;
+  margin: 0.5em 0em;
+}
+.landing-list-children2 > div{
+  
+  width: 100%;
+  height: 100%;
+}
+.landing-list-children2 button{
+  
+}
+
 
 .landing-list-children2-move{
   @include dispay-flex(column, center);
   font-size: 3em;
-  margin: 1em !important;
-  background-color: rgb(200, 0, 255);
-  border: 1px black solid;
+  margin: 0.5em !important;
+  background-color: rgb(151, 161, 165);
+  border: 1px rgb(175, 170, 170) solid;
+  border-radius: 10px
 }
 
 .landing-list2-children1{
   @include dispay-flex(row, center);
   width: 80%;
-  background-color: rgb(128, 255, 0);
+  /*background-color: rgb(128, 255, 0);*/
   border: 1px black;
 }
 .landing-list2-children2{
   @include dispay-flex(column, start);
   height: 20em;
   width: 80%;
-  background-color: rgb(0, 132, 255);
+  /*background-color: rgb(0, 132, 255);*/
   border: 1px black;
+  
 }
 
 .entete_texte{
@@ -67,6 +89,7 @@
   
   .custom_color_accept{
     @include button-color-accepted();
+    
   }
   
   
@@ -74,6 +97,9 @@
     @include button-color-refused();
   }
   
+  .titre_formulaire{
+    margin-left: 1em;
+  }
 
   
   /*--------------------------------------------Navbar*/
@@ -110,7 +136,7 @@
     background-color: $color_variant_standard;
     padding: 0.2em 1.2em;
     margin: 0.2em 0.4em;
-    color: white!important;
+    /*color: white!important;*/
     border-radius: 50px;
   }
   .nav_perso li:hover{

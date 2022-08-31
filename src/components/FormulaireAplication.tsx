@@ -58,7 +58,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
       <>
           <div className="">
             <div className="">
-              {'      '}<h3>Information sur vous</h3>
+              {'      '}<h3 className="titre_formulaire">Information sur vous</h3>
             </div>
             <form
               action=""

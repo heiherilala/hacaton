@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { backgroundColor, APIUrl, variant } from '../../constants';
 import { postPutDeletRequest } from '../../hoooks';
 import { Domain } from '../../interfaces';
-import ConfirmEmprunt from '../ComfirmationEmprunter';
+import ConfirmDispo from '../ConfirmDispo';
 import Formulaire from '../Formulaire';
 import Load from '../Loading';
 
@@ -16,7 +16,7 @@ interface props{
     item: any;
     actualisationAllData: () => void;
     bouttons:{name:string,method:(object:object)=>void}[]|null
-    keFocus:[number, number | null, number | null][]
+    keFocus:{place: [number, number | null, number | null],funcion: (a: any) => any}[]
     takeVauleObjectByNumber:(n: [number, number | null, number | null], o: Object) => string
     dataCompose:Domain[]
     delet:boolean
@@ -55,17 +55,17 @@ export const LigneList:React.FC<props> = (props) => {
     return (
         <>
             
-            <tr id={""+item.idBook} key={item.idBook}>
+            <tr id={""+item.idJobOffer} key={item.idJobOffer}>
                 {keFocus.map((donne)=>{return(
-                    <td>{""+takeVauleObjectByNumber(donne,item)}</td>
+                    <td>{donne.funcion(""+takeVauleObjectByNumber(donne.place,item))}</td>
                 )})}
                 {((bouttons!=null))?
                     <td  className="center">
                         <div className="btn-group mr-2" role="group" aria-label="First group">
                             {bouttons.map((boutton)=>{return(
-                                ((boutton.name=="Emprunter"&&item.status=="Disponible")||(boutton.name!="Emprunter"&&item.status!="Disponible"))?
-                                <button onClick={()=>{setActivModif(true);}} type="button" className={"btn custom_color_1"}>{boutton.name}</button>:
-                                <button onClick={()=>{setActivModif(true);}} type="button" disabled className={"btn custom_color_2"}>{boutton.name}</button>
+                                ((boutton.name=="disponible"&&item.available)||(boutton.name!="disponible"&&!item.available))?
+                                <button onClick={()=>{setActivModif(true);}} type="button" disabled className={"btn custom_color_2"}>{boutton.name}</button>:
+                                <button onClick={()=>{setActivModif(true);}} type="button" className={"btn custom_color_1"}>{boutton.name}</button>
                             )})}
                         </div>
                     </td>:<></>
@@ -77,8 +77,8 @@ export const LigneList:React.FC<props> = (props) => {
                 }
             </tr>
             {activModif?
-            <ConfirmEmprunt
-                book = {item}
+            <ConfirmDispo
+                joboffer = {item}
                 finish = {()=>{setActivModif(false)}}
                 function = {()=>{
                     bouttons!=null?bouttons[0].method({data:item,functionIfTrue:setActivModif(false),functionIfFalse:setActivModif(false),token:"",startSctivLoading:startSctivLoading}):console.log("")
