@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { FormulaireAplication } from '.';
+import { getCurrentUser } from '../hoooks';
 
 
 interface props {
@@ -10,8 +11,14 @@ interface props {
 
 const ConfirmAplication: React.FC<props> = (props) => {
   const [activFrom, setActivFrom] = useState(false)
-
-
+  const [myToken,setMyToken] = useState<string>()
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) {
+      const subtitutionValue:string =  user.accessToken
+      setMyToken(subtitutionValue);
+    }
+  }, []);
 
 
   return (
@@ -43,7 +50,7 @@ const ConfirmAplication: React.FC<props> = (props) => {
             <p><span className='entete_text'>Lieu d'exécution : </span>{props.item.location}</p>
           </Modal.Body>
           
-          <FormulaireAplication item={props.item} fermetur={()=>{setActivFrom(false)}} />
+          <FormulaireAplication item={props.item} fermetur={()=>{setActivFrom(false)}} token={myToken} />
         </Modal>
       </>:<></>}
     </>

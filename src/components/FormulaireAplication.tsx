@@ -3,15 +3,16 @@ import { Field, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { APIUrl, backgroundColor } from "../constants";
+import { Application } from "../interfaces";
+import { postPutDeletRequest } from "../hoooks";
 interface props {
-  item:any;
+  item:Application;
   fermetur:()=>void;
+  token:string|undefined
 }
 
 const FormulaireAplication: React.FC<props> = (props) => {
-  const fermerFormulaire=()=>{setInterval(()=>{props.fermetur()},500); };
-  const phoneRegExp =
-    /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+  const fermerFormulaire=()=>{const timer = setInterval(()=>{props.fermetur(); clearInterval(timer)},500); };
   const formik = useFormik({
     initialValues: {
       nameAplication: "",
@@ -23,32 +24,29 @@ const FormulaireAplication: React.FC<props> = (props) => {
       nameAplication: Yup.string()
         .max(100, "Caractère inferieur ou egale à 100")
         .required("Requis"),
-      email: Yup.string()
+      email: Yup.string().email()
         .max(100, "Caractère inferieur ou egale à 100")
         .required("Requis"),
       salary: Yup.number()
-        .max(1000000, "salary trop élevé")
+        .max(100000000, "salary trop élevé")
         .required("Requis")
         .typeError('Saisissez des chiffres'),
       profil: Yup.string()
-        .max(1000, "trop long"),
+        .max(100, "Caractère inferieur ou egale à 100")
+        .required("Requis"),
     }),
     onSubmit: (values) => {
-      console.log(values);
-      try {
-        axios["post"](APIUrl+"/applications", {
-          candidateName: values.nameAplication,
-          email: values.email,
-          salary: values.salary,
-          profile: values.profil,
-          jobOffer:{idJobOffer:props.item.idJobOffer}
-        })
-        .then((response)=>{fermerFormulaire()})
-        .catch((error)=>{fermerFormulaire()})
-        ;
-      } catch (error) {
-        fermerFormulaire();
-      }
+      const newDate = new Date;
+
+      const objectData = {
+        candidateName: values.nameAplication,
+        email: values.email,
+        salary: values.salary,
+        profile: values.profil,
+        dateApplication: newDate.getDate.toString,
+        jobOffer:{idJobOffer:props.item.jobOffer?.idJobOffer}
+      };
+        postPutDeletRequest("/job-offers",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
     },
   });
 
@@ -74,7 +72,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
                   id="nameAplication"
                   type="text"
                   className="input_formulaire"
-                  placeholder=""
+                  placeholder="Nom complet"
                   value={formik.values.nameAplication}
                   onChange={formik.handleChange}
                 />
@@ -91,7 +89,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
                   id="email"
                   type="text"
                   className="input_formulaire"
-                  placeholder=""
+                  placeholder="Email professionnel"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                 />
@@ -106,7 +104,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
                   id="profil"
                   type="textarea"
                   className="input_formulaire bigText"
-                  placeholder=""
+                  placeholder="profil"
                   value={formik.values.profil}
                   onChange={formik.handleChange}
                 />
@@ -121,15 +119,15 @@ const FormulaireAplication: React.FC<props> = (props) => {
                   id="salary"
                   type="text"
                   className="input_formulaire"
-                  placeholder=""
+                  placeholder="salariale"
                   value={formik.values.salary}
                   onChange={formik.handleChange}
                 />
                 {formik.errors.salary ? <p> {formik.errors.salary} </p> : null}
               </div>
                 
-              <button type="submit" className={"btn_envoie btn_type "}>
-                {"Annuler".toLocaleUpperCase()}
+              <button className={"btn_envoie btn_type "} onClick={()=>{props.fermetur()}}>
+                {"Annuler".toUpperCase()}
               </button>
               <button type="submit" className={"btn_envoie btn_type "}>
                 {"Confirmer".toUpperCase()}
