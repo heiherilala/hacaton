@@ -5,7 +5,7 @@ import { newApplication, newJobOffer, ProjectUrl} from '../constants';
 import background from "./../assets/images/pexels-andrea-piacquadio-3760067.jpg";
 import { useEffect, useRef, useState } from "react";
 import { axiosGetWithPage, axiosGget, login } from '../hoooks';
-import { ConfirmAplication, NavbarHeader } from '../components';
+import { ConfirmAplication, Load, NavbarHeader } from '../components';
 import { Application, Domain, JobOffer } from '../interfaces';
 import { Link } from 'react-router-dom';
 import { number } from 'yup/lib/locale';
@@ -26,6 +26,7 @@ import { number } from 'yup/lib/locale';
     const [aplication, setAplication] = useState<Application[]>([newApplication]);
     const [job, setJob] = useState<JobOffer[]>([newJobOffer]);
     const [loadJob, setLoadJob] = useState<number>(0);
+    const [activLoad, setActivLoad] = useState<boolean>();
     useEffect(()=>{
         if (domaine == null){
             axiosGetWithPage("/job-offers",page,valuNumbur,token,setJob,()=>{},()=>{})//(endPoint: string, page: number, page_sise: number, token: string | undefined, takingData: React.Dispatch<React.SetStateAction<any[]>>, functionIfTrue: (() => void)
@@ -36,7 +37,10 @@ import { number } from 'yup/lib/locale';
     
     const [dataCompose, setDataCompose] = useState<Domain[]>([]);
     useEffect(() => {
-      axiosGget("/domains/?page=1&page_size=100",undefined,setDataCompose,null,null)
+        if (activLoad!=undefined) {
+            setActivLoad(true);
+        } 
+        axiosGget("/domains/?page=1&page_size=100",undefined,setDataCompose,null,()=>{setActivLoad(false)});
     }, [])
 
     //domains/22/job-offers
@@ -121,7 +125,7 @@ import { number } from 'yup/lib/locale';
                                         tout
                                     </option>
                                     {dataCompose.map((data)=>{return(
-                                        <option value="10" onClick={() => setDomaine(data.idDomain)} >
+                                        <option value="10" onClick={() => {setDomaine(data.idDomain);setPage(1)} } >
                                             {data.name}
                                         </option>
                                     )})}
@@ -193,6 +197,7 @@ import { number } from 'yup/lib/locale';
      </footer>
         </div>
         }
+        {activLoad==true?Load(()=>{setActivLoad(false)}):<></>}
     </>
   );
 }

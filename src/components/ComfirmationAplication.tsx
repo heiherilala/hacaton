@@ -50,7 +50,7 @@ const ConfirmAplication: React.FC<props> = (props) => {
           <div className='col-6'>
               <p><span className='entete_text'>Société : </span> {props.item.company}</p>
               <p><span className='entete_text'>Poste : </span>{props.item.post}</p>
-              <p><span className='entete_text'>Lieu d'exécution : </span>{props.item.location}</p>
+              <p><span className='entete_text'>Lieu : </span>{props.item.location}</p>
             </div>
             <div className='col-6'>
               <p><span className='entete_text'>Profil recherché : </span> {props.item.profile}</p>
@@ -60,7 +60,7 @@ const ConfirmAplication: React.FC<props> = (props) => {
             
 
           </Modal.Body>
-          <Modal.Body className='formulaire_candidat_info'>
+          <Modal.Body className='formulaire_candidat'>
           
             <FormulaireAplication item={props.item} fermetur={()=>{setActivFrom(false)}} token={myToken} />
           </Modal.Body>

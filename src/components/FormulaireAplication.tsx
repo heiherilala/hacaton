@@ -103,8 +103,8 @@ const FormulaireAplication: React.FC<props> = (props) => {
               </div>                      
               </div>
               <div className="row">
-                <div className="col-6">
-                <div className="form_contenu">
+                <span></span>
+                <div className="form_contenu2">
                 <label htmlFor="id" className="label_input">
                   Votre email:
                 </label>
@@ -118,8 +118,6 @@ const FormulaireAplication: React.FC<props> = (props) => {
                 />
                 {formik.errors.email ? <p> {formik.errors.email} </p> : null}
               </div>
-                </div>     
-                <div className="col-6">
                   <div className="form_contenu">
                   <label htmlFor="id" className="label_input">
                     Prétention salariale (Ar)
@@ -135,14 +133,15 @@ const FormulaireAplication: React.FC<props> = (props) => {
                   {formik.errors.salary ? <p> {formik.errors.salary} </p> : null}
                 </div>           
               </div>
-              </div>
-                
-              <button className={"btn_envoie btn_type "} onClick={()=>{props.fermetur()}}>
-                {"Annuler".toUpperCase()}
-              </button>
-              <button type="submit" className={"btn_envoie btn_type "}>
-                {"Confirmer".toUpperCase()}
-              </button>
+              <span>
+                <button className={"btn_envoie btn_type2 "} onClick={()=>{props.fermetur()}}>
+                  {"Annuler".toUpperCase()}
+                </button>
+                <button type="submit" className={"btn_envoie btn_type "}>
+                  {"Confirmer".toUpperCase()}
+                </button>
+              </span>
+
             </form>
           </div>
       </>
