@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { IUser } from '../interfaces';
 import EventBus from '../hoooks/EventBus';
 import { Field, useFormik } from "formik";
-import Ranking from './Ranking';
+import Ranking from './ApplicationList';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ import axios from 'axios';
 
 
   const navigate = ()=>{
-    window.location.href=(ProjectUrl+"/Ranking");
+    window.location.href=(ProjectUrl+"/application");
   }
 
 

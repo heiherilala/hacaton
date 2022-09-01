@@ -32,7 +32,7 @@ import { Application, JobOffer } from '../interfaces';
 
 
   const navigate = ()=>{
-    window.location.href=(ProjectUrl+"/Ranking");
+    window.location.href=(ProjectUrl+"/application");
   }
 
   const functionLog = (username:string, password:string) => {
@@ -53,8 +53,8 @@ import { Application, JobOffer } from '../interfaces';
     <>
         {NavbarHeader(
             [
-                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/BooksClass")},
-                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/Ranking")}
+                {name:"Listes des offres",href: (ProjectUrl + "/list-job")},
+                {name:"Listes des candidatures",href: (ProjectUrl + "/application")}
             ],
             {name:"Offre d’emploi",href: (ProjectUrl + "/")}
         )}

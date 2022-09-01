@@ -10,11 +10,11 @@ interface props{
     setActivUpdat: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
-const BooksClass: React.FC<props> = (props) => {
+const ListJob: React.FC<props> = (props) => {
 
 
-const takeName = (a:boolean)=>{
-  if (a==true) {
+const takeName = (a:any)=>{
+  if (a!="true") {
     return "disponible"
   }else{
     return "indisponible"
@@ -28,8 +28,8 @@ const takeName = (a:boolean)=>{
         <div className='background_gray' >
           {NavbarHeader(
               [
-                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/BooksClass")},
-                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/Ranking")}
+                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/jist-job")},
+                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/application")}
               ],
               {name:"Offre d’emploi",href: (ProjectUrl + "/")}
           )}  
@@ -39,7 +39,7 @@ const takeName = (a:boolean)=>{
             actualisationAllData={props.actualisationAllData}
             setActivUpdat={props.setActivUpdat}
             colloneName= {["Référence","Domaine",'Poste','Statut']}
-            keFocus={[{place:[1,null,null],funcion:(a:any)=>{return a}},{place:[9,1,null],funcion:(a:any)=>{return a}},{place:[2,null,null],funcion:(a:any)=>{return a}},{place:[8,null,null],funcion:takeName}]}
+            keFocus={[{place:[1,null,null],funcion:(a:any)=>{return a}},{place:[9,1,null],funcion:(a:any)=>{return a}},{place:[2,null,null],funcion:(a:any)=>{return a}},{place:[6,null,null],funcion:takeName}]}
             bouttons={[
               {name:"disponible",method:((book:any)=>{postPutDeletRequest("books",book.data,1,false,false,book.functionIfTrue,book.functionIfFalse,book.token)})},
               {name:"indisponible",method:((book:any)=>{postPutDeletRequest("books",book.data,1,false,false,book.functionIfTrue,book.functionIfFalse,book.token)})},
@@ -53,4 +53,4 @@ const takeName = (a:boolean)=>{
     );
 };
 
-export default BooksClass;
+export default ListJob;

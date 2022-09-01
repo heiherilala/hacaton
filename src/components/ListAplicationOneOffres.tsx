@@ -21,9 +21,8 @@ export const ListAplicationOneOffres:React.FC<Props> = ({dataActualisation,retur
     <>
       <div className="fonds">
         <div className="whitFond">
-            
-
-
+            <p className="litleTytle">titre1</p><p>reponse 1</p> <p className="litleTytle">titre1</p><p>reponse 1</p>
+            <p className="litleTytle">titre1</p><p>reponse 1</p> <p className="litleTytle">titre1</p><p>reponse 1</p>
         </div>
       </div>
     </>

@@ -80,11 +80,11 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
         }
       };
       if (props.id==null) {
-        console.log("Start POST");
-        postPutDeletRequest("/job-offers",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
+        try{
+          postPutDeletRequest("/job-offers",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
+        } catch (error){}
       }else{
-        console.log("Start PUT");
-        postPutDeletRequest("/job-offers/"+props.id,objectData,null,false,true,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
+          postPutDeletRequest("/job-offers/"+props.id,objectData,null,false,true,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
       }
       
     },

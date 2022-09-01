@@ -4,9 +4,9 @@ import "./style/main.css";
 import "bootstrap-css-only/css/bootstrap.min.css"
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import { BooksClass, Landing, Login, Ranking } from "./pages";
+import { ApplicationList, ListJob, Landing, Login } from "./pages";
 import { Profile, Register } from "./components";
-import { newJobOffer } from "./constants";
+import { newApplication, newJobOffer } from "./constants";
 
 function App() {
   const [myToken,setMyToken] = useState<string>()
@@ -49,11 +49,11 @@ function App() {
                       </>
                     }
                 />
-                <Route path="/Ranking" 
+                <Route path="/application" 
                     element={
                       <>
-                        {<Ranking 
-                          items={[newJobOffer]} //book[];
+                        {<ApplicationList 
+                          items={[newApplication]} //book[];
                           actualisationAllData={actualisationAllData} //() => void;
                           setActivUpdat={setActivUpdat} //React.Dispatch<React.SetStateAction<boolean>>;
                         />}
@@ -63,7 +63,7 @@ function App() {
                 <Route path="/list-job" 
                     element={
                       <>
-                        {<BooksClass 
+                        {<ListJob 
                           items={[newJobOffer]} //book[];
                           actualisationAllData={actualisationAllData} //() => void;
                           setActivUpdat={setActivUpdat} //React.Dispatch<React.SetStateAction<boolean>>;
