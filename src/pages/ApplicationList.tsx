@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { setConstantValue } from 'typescript';
 import { NavbarHeader, TableConstructor } from '../components';
 import { newJobOffer, ProjectUrl } from '../constants';
 import { axiosGget, getCurrentUser } from '../hoooks';
@@ -16,7 +17,7 @@ const ApplicationList: React.FC<props> = (props) => {
   const [items, setItems] = useState(props.items);
   const [offerActiv, setOfferActiv] = useState(newJobOffer);
   const [myToken,setMyToken] = useState<string>()
-  const [id,setId] = useState<number>(props.id)
+  const [id,setId] = useState<string|number>(props.id)
   useEffect(() => {
     const user = getCurrentUser();
     if (user) {
@@ -28,34 +29,16 @@ const ApplicationList: React.FC<props> = (props) => {
   useEffect(() => {
     changeItemt();
     changeOffre();
-  }, [id]);
+  }, []);
 
   const changeOffre = ()=>{
     axiosGget("/job-offers/"+id,myToken,setOfferActiv,null,null)
   }
   const changeItemt = ()=>{
-    axiosGget("/job-offers/"+id+"/applications",myToken,setItems,null,null)
+    axiosGget("/job-offers/"+id+"/applications/?page=1&page_size=50",myToken,setItems,null,null)
   }
 
 
-
-
-  /*
-        <div className='card_en-tete'><h3> <span className='entete_text'></span>{props.item.domain.name}</h3></div>
-        
-        <div className='card_body'>
-            <p><span className='entete_text'>Poste : </span>{props.item.post}</p>
-            <p><span className='entete_text'>Profil : </span> {props.item.profile}</p>
-            <p><span className='entete_text'>Lieu : </span>{props.item.location}</p>
-        </div>
-        <div className='card_foot'>
-          <Button className='custom_color_accept ' onClick={()=>{setActivFrom(true)}}>
-              Voir l'annonce
-          </Button>
-        </div>
-
-
-  */
 
 
     return (
@@ -63,7 +46,7 @@ const ApplicationList: React.FC<props> = (props) => {
           {NavbarHeader(
               [
                   {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
-                  {name:"Listes des applications",href: (ProjectUrl + "/application")}
+                  {name:"Applications par",href: (ProjectUrl + "/application")}
               ],
               {name:"Offre d’emploi",href: (ProjectUrl + "/")}
           )}
@@ -72,9 +55,11 @@ const ApplicationList: React.FC<props> = (props) => {
             <Row className="offreDeteils">
               <Col md={12}>
                 <h2>{"Offre N°:"+offerActiv.reference}</h2>
+                <input type="text" name="id" id="idId" value={id} onChange={(e)=>{setId(e.target.value)}} />
+                <button onClick={()=>{changeItemt();changeOffre();}}>Changer offre</button>
               </Col>
               <Col md={12}>
-                <div>
+                <div className="job_offer_info">
                   <Row>
                     <Col md={5}>
                       {`post:`}

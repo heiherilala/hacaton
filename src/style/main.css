@@ -899,4 +899,17 @@ footer p {
 
 .marging {
   margin-top: 2em;
+}
+
+.job_offer_info {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.offreDeteils {
+  background-color: #624034;
+  color: #ece4de;
+  padding: 20px;
+  padding: 40px;
+  border-radius: 10px;
 }/*# sourceMappingURL=main.css.map */

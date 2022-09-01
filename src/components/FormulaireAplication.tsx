@@ -37,6 +37,11 @@ const FormulaireAplication: React.FC<props> = (props) => {
     }),
     onSubmit: (values) => {
       const newDate = new Date;
+      const y = newDate.getFullYear();
+      const d = newDate.getMonth();
+      const m = newDate.getDay();
+      const dat = "" + y +"-0"+ m +"-0" + d
+
       console.log(props.item);
       
       const objectData = {
@@ -44,11 +49,11 @@ const FormulaireAplication: React.FC<props> = (props) => {
         email: values.email,
         salary: values.salary,
         profile: values.profil,
-        dateApplication: newDate.getDate.toString,
+        dateApplication: dat,
         jobOffer:{idJobOffer:props.item.idJobOffer},
       };
       try{
-        postPutDeletRequest("/job-offers",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
+        postPutDeletRequest("/applications",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
       } catch (error){};
     },
   });

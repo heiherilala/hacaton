@@ -43,6 +43,16 @@ import { number } from 'yup/lib/locale';
         axiosGget("/domains/?page=1&page_size=100",undefined,setDataCompose,null,()=>{setActivLoad(false)});
     }, [])
 
+    const [maxDomain, setMaxDomain] = useState<Domain>();
+    useEffect(() => {
+        axiosGget("/domains-applied",undefined,setMaxDomain,null,()=>{setActivLoad(false); console.log( "cccccccccccccccccccccccccccccccccccccccccc");
+        });
+    }, [])
+    const [maxDomainCount, setMaxDomainCount] = useState<number>();
+    useEffect(() => {
+        axiosGget("/domains-applied/count",undefined,setMaxDomainCount,null,()=>{setActivLoad(false); console.log( "cccccccccccccccccccccccccccccccccccccccccc");
+        });
+    }, [])
     
     const [password, setPassword] = useState<string>("");
     const [token, setToken] = useState<string>("");
@@ -170,7 +180,7 @@ import { number } from 'yup/lib/locale';
                     </div>
                 </div>
                 <div className="p-2 landing-list">
-                    <p>Le saviez-vous? Les métiers les plus recherché chez nous se trouvent dans le domaine de : INFORMATIQUE (10 candidatures)</p>
+                    <p>{"Le saviez-vous? Les métiers les plus recherché chez nous se trouvent dans le domaine de : "+maxDomain?.name+" ("+maxDomainCount+" candidatures)"}</p>
                 </div>
                 <div className="p-2 landing-list">
                     <p>VOUS ETES RECRUTEURS? CONTACTEZ-NOUS POUR QUE NOUS METTONS EN AVANT VOTRE OFFRE</p>
