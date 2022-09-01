@@ -46,7 +46,7 @@ const ApplicationList: React.FC<props> = (props) => {
           {NavbarHeader(
               [
                   {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
-                  {name:"Applications par",href: (ProjectUrl + "/application")}
+                  {name:"Listes des candicatures",href: (ProjectUrl + "/application")}
               ],
               {name:"Offre d’emploi",href: (ProjectUrl + "/")}
           )}
@@ -62,7 +62,7 @@ const ApplicationList: React.FC<props> = (props) => {
                 <div className="job_offer_info">
                   <Row>
                     <Col md={5}>
-                      {`post:`}
+                      {`Poste:`}
                     </Col>
                     <Col md={7}>
                       {offerActiv.post}
@@ -70,7 +70,7 @@ const ApplicationList: React.FC<props> = (props) => {
                   </Row>
                   <Row>
                     <Col md={5}>
-                      {`company:`}
+                      {`Companie:`}
                     </Col>
                     <Col md={7}>
                       {offerActiv.company}
@@ -78,7 +78,7 @@ const ApplicationList: React.FC<props> = (props) => {
                   </Row>
                   <Row>
                     <Col md={5}>
-                      {`domain:`}
+                      {`Domaine:`}
                     </Col>
                     <Col md={7}>
                       {offerActiv.domain?.name}

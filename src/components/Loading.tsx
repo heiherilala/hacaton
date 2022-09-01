@@ -5,6 +5,7 @@ import { backgroundColor } from '../constants';
 
 
 const Load = (FinishLoading:()=>void) => {
+
     return(
         <>
             <div className="realBackground">
@@ -13,6 +14,7 @@ const Load = (FinishLoading:()=>void) => {
                   {"  "}Chargement en cours
                 </button>
             </div>
+
         </>
     )
 
