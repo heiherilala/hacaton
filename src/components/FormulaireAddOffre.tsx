@@ -102,7 +102,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
               X
             </button>
             <div className="titels">
-              {'      '}<h2>FORMULAIRE Offre</h2>
+              {'      '}<h2>FORMULAIRE DES OFFRES</h2>
             </div>
             <form
               action=""
@@ -112,7 +112,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
             >
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                  Company
+                  Companie
                 </label>
                 <input
                   id="company"
@@ -129,7 +129,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                contract
+                Contrat
                 </label>
 
                 <select
@@ -168,7 +168,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                location
+                Lieu
                 </label>
                 <input
                   id="location"
@@ -184,7 +184,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                post
+                Poste
                 </label>
                 <input
                   id="post"
@@ -200,7 +200,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                profile
+                Profil
                 </label>
                 <input
                   id="profile"
@@ -216,7 +216,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                domain
+                Domaine
                 </label>
                 <select
                   id="domain"
@@ -238,7 +238,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
 
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
-                reference
+                Référence
                 </label>
                 <input
                   id="reference"
