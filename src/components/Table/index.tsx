@@ -40,6 +40,10 @@ export const TableConstructor: React.FC<props> = (props) => {
   const [loagJobOffer, setLoagJobOffer] = useState<number>(0);
   const [dataCompose, setDataCompose] = useState<Domain[]>([]);
   const [loadDataCompose, setLoadDataCompose] = useState<number>(0);
+  useEffect(() => {
+    setActivLoading(true)
+    axiosGget("/domains/?page=1&page_size=100",myToken,setDataCompose,()=>{setActivLoading(false)},null)
+  }, [loadDataCompose])
 
   const finishLoadingt = ()=>{setActivLoading(false)};
   const actualisationAllData =()=>{setLoagJobOffer(loagJobOffer+1);console.log("UPDATEEEEEEEEEEEEEEEEEEEEEEEEE");};
@@ -58,10 +62,7 @@ export const TableConstructor: React.FC<props> = (props) => {
     axiosGetWithPage("/job-offers",page,valuNumbur,myToken,setDataJobOffer,()=>{setActivLoading(false)},null)
   }, [loagJobOffer,page,valuNumbur,myToken])
 
-  useEffect(() => {
-    setActivLoading(true)
-    axiosGget("/domains/?page=1&page_size=100",myToken,setDataCompose,()=>{setActivLoading(false)},null)
-  }, [loadDataCompose])
+
 
   useEffect(() => {
     axiosGget("/job-offers/count",myToken,setStringPage,null,null)

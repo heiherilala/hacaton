@@ -3,7 +3,7 @@
 import { Application, JobOffer } from "../interfaces";
 //https://virtserver.swaggerhub.com/fenohasinalala/overlordJobOffer/1.0.0
 export const variant: string = "info";
-export const APIUrl: string = "http://localhost:8080";
+export const APIUrl: string = "https://hackaton3-library.herokuapp.com";
 export const ProjectUrl: string = "http://localhost:3000";
 export const backgroundColor: string = "bg-"+variant;
 

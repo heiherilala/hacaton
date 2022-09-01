@@ -69,12 +69,14 @@ import { number } from 'yup/lib/locale';
   }
 
 
+
+  
   return (
     <>
         {NavbarHeader(
               [
                   {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
-                  {name:"Applications par",href: (ProjectUrl + "/application")}
+                  {name:"Listes des candicatures",href: (ProjectUrl + "/application")}
               ],
               {name:"Offre d’emploi",href: (ProjectUrl + "/")}
           )}
