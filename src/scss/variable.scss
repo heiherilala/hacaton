@@ -22,6 +22,7 @@ $color_accept_hover: #A29787 ;
 
 $color_variant_3: #4f2f1c ;
 
+
 @mixin button-color($base, $hover, $active, $focus, $visited, $disabled) {
     background-color: $base !important;
     border-color: $base !important;

@@ -33,7 +33,7 @@ import axios from 'axios';
 
 
   const navigate = ()=>{
-    window.location.href=(ProjectUrl+"/application");
+    window.location.href=(ProjectUrl+"/");
   }
 
 

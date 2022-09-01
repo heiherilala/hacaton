@@ -24,7 +24,6 @@
   border: 1px solid #252222;
 }
 
-
 .landing-list{
   @include dispay-flex(column, center);
   background-color: rgb(241, 241, 241)/*$color_background_ligtht*/;
@@ -318,6 +317,12 @@ footer a,
     width: 180vw !important;
     display: block !important;
     position: fixed !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1500;
+  
+
+    
     top: 0px;
     left: 0x;
     z-index: 152;
@@ -350,16 +355,22 @@ footer a,
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 640px;
-    padding-bottom: 50px;
-    padding-top: 50px;
-    position: fixed;
-    top: 3em;
-    left: 45%;
-    margin-left: -240px;
-    border-radius: 5px;
-    overflow: hidden;
+    width: 800px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-radius: 15px;
     background-color: white;
+    position: absolute; /*Can also be `fixed`*/
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          max-width: 100%;
+          max-height: 100%;
+          overflow: auto;
+          margin-top: 4em;
+
   }
   
   .form_fonds h2 {
@@ -507,7 +518,7 @@ footer a,
   .btn_cancel {
     display: block;
     position: relative;
-    left:40%;
+    left: 45%;
     color: black;
     background-color: rgba(21, 1, 1, 0);
     border: none;
@@ -608,4 +619,54 @@ footer a,
   /*--------------------Table*/
   .custom_color_page{
     @include button-color-light();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .landingSelection{
+    @include dispay-flex (row, center);
+    width: 100%;
+    color: $color_variant_dark;
+    font-weight: bolder;
+    & p{
+      margin-left: 5px;
+      margin-right: 5%;
+    }
+  }
+
+  .landingSelect{
+    width: 200px !important;
+    margin-left: 1em;
+    background-color: rgba(222, 184, 135, 0.501);
+  }
+
+
+  .nav-Fot{
+    position: absolute !important;
+    top: 0.3em;
+    left: 12em;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .nav-Fot {
+      display: none !important;
+    }
+  }
+
+  .containtApication{
+    @include dispay-flex(row, start)
+  }
+
+  .marging{
+    margin-top: 2em;
   }

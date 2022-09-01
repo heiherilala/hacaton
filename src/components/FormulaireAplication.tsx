@@ -95,7 +95,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
                   id="profil"
                   type="textarea"
                   className="input_formulaire bigText"
-                  placeholder="profil"
+                  placeholder="Profil"
                   value={formik.values.profil}
                   onChange={formik.handleChange}
                 />
@@ -126,7 +126,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
                     id="salary"
                     type="text"
                     className="input_formulaire"
-                    placeholder="salariale"
+                    placeholder="salaire"
                     value={formik.values.salary}
                     onChange={formik.handleChange}
                   />

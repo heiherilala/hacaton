@@ -39,12 +39,31 @@ const ApplicationList: React.FC<props> = (props) => {
 
 
 
+
+  /*
+        <div className='card_en-tete'><h3> <span className='entete_text'></span>{props.item.domain.name}</h3></div>
+        
+        <div className='card_body'>
+            <p><span className='entete_text'>Poste : </span>{props.item.post}</p>
+            <p><span className='entete_text'>Profil : </span> {props.item.profile}</p>
+            <p><span className='entete_text'>Lieu : </span>{props.item.location}</p>
+        </div>
+        <div className='card_foot'>
+          <Button className='custom_color_accept ' onClick={()=>{setActivFrom(true)}}>
+              Voir l'annonce
+          </Button>
+        </div>
+
+
+  */
+
+
     return (
         <>
           {NavbarHeader(
               [
                   {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
-                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/application")}
+                  {name:"Listes des applications",href: (ProjectUrl + "/application")}
               ],
               {name:"Offre d’emploi",href: (ProjectUrl + "/")}
           )}
@@ -90,11 +109,11 @@ const ApplicationList: React.FC<props> = (props) => {
 
           {items.map((item)=>{return (
             <Container>
-              <Row className='contAplication'>
-                <Col md={{ span: 6, offset: 3 }}>
+              <Row className='contAplication jumbotron marging'>
+                <Col md={{ span: 6, offset: 3 }} className="titleAplication">
                   <Row>
-                    <Col md={5}>
-                      {`Reférence de l'offre:`}
+                    <Col md={5} className="titleApication">
+                      <b>{`Reférence:`}</b>
                     </Col>
                     <Col md={7}>
                       {item.jobOffer?.reference}
@@ -106,9 +125,9 @@ const ApplicationList: React.FC<props> = (props) => {
                 <Col md={5}>
                   <Row>
                     <Col md={5}>
-                      {`Nom du candidat:`}
+                    <b>{`Nom du candidat:`}</b>
                     </Col>
-                    <Col md={7}>
+                    <Col md={7} className="containtApication">
                       {item.candidateName}
                     </Col>
                   </Row>
@@ -116,9 +135,9 @@ const ApplicationList: React.FC<props> = (props) => {
                 <Col md={{ span: 5, offset: 2 }}>
                   <Row>
                     <Col md={5}>
-                      {`Email du candidat:`}
+                    <b>{`Email du candidat:`}</b>
                     </Col>
-                    <Col md={7}>
+                    <Col md={7} className="containtApication">
                       {item.email}
                     </Col>
                   </Row>
@@ -127,9 +146,9 @@ const ApplicationList: React.FC<props> = (props) => {
                 <Col md={5}>
                   <Row>
                     <Col md={5}>
-                      {`Date de postulation :`}
+                    <b>{`Date du post :`}</b>
                     </Col>
-                    <Col md={7}>
+                    <Col md={7} className="containtApication">
                       {item.dateApplication}
                     </Col>
                   </Row>
@@ -137,9 +156,9 @@ const ApplicationList: React.FC<props> = (props) => {
                 <Col md={{ span: 5, offset: 2 }}>
                   <Row>
                     <Col md={5}>
-                      {`Prétention salariale :`}
+                    <b>{`Prétention salariale :`}</b>
                     </Col>
-                    <Col md={7}>
+                    <Col md={7} className="containtApication">
                       {item.salary}
                     </Col>
                   </Row>
@@ -148,9 +167,9 @@ const ApplicationList: React.FC<props> = (props) => {
                 <Col md={12}>
                   <Row>
                     <Col md={4}>
-                      {`Profil du candidat:`}
+                    <b>{`Profil du candidat:`}</b>
                     </Col>
-                    <Col md={8}>
+                    <Col md={8} className="containtApication">
                       {item.profile}
                     </Col>
                   </Row>

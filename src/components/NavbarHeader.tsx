@@ -48,17 +48,8 @@ const NavbarHeaderView = (navList:{name:string,href:string}[],title:{name:string
               </button>
 
 
-
-
-
-
-
-
-
-              <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
-                
-                <ul className="navbar-nav mr-auto">
+              <div className="navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto nav-Fot">
                   {currentUser ?
                   navList.map((data,key)=>{return(
                       <li className="nav-item active">

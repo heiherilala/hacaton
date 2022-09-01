@@ -33,7 +33,7 @@ const FormulaireAddOffre: React.FC<props> = (props) => {
       company: (props.joboffer==undefined?"":props.joboffer.company),
       contract: (props.joboffer==undefined?"":""+props.joboffer.contract),
       description: (props.joboffer==undefined?"":""+props.joboffer.description),
-      domain: (props.joboffer==undefined?"Comedy":props.joboffer.domain?.name),
+      domain: (props.joboffer==undefined?"":props.joboffer.domain?.name),
       location: (props.joboffer==undefined?"":""+props.joboffer.location),
       post: (props.joboffer==undefined?"":""+props.joboffer.post),
       profile: (props.joboffer==undefined?"":""+props.joboffer.profile),

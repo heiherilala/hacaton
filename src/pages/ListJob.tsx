@@ -26,13 +26,13 @@ const takeName = (a:any)=>{
     return (
         <>
         <div className='background_gray' >
-          {NavbarHeader(
+        {NavbarHeader(
               [
-                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/jist-job")},
-                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/application")}
+                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
+                  {name:"Applications par",href: (ProjectUrl + "/application")}
               ],
               {name:"Offre d’emploi",href: (ProjectUrl + "/")}
-          )}  
+          )}
           <div className='liste_tab'>
           <TableConstructor 
             items={props.items}

@@ -43,7 +43,6 @@ import { number } from 'yup/lib/locale';
         axiosGget("/domains/?page=1&page_size=100",undefined,setDataCompose,null,()=>{setActivLoad(false)});
     }, [])
 
-    //domains/22/job-offers
     
     const [password, setPassword] = useState<string>("");
     const [token, setToken] = useState<string>("");
@@ -59,23 +58,16 @@ import { number } from 'yup/lib/locale';
     })
   }
 
-  
-
-
-  
-  
-  
-
 
   return (
     <>
         {NavbarHeader(
-            [
-                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/BooksClass")},
-                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/Ranking")}
-            ],
-            {name:"Offre d’emploi",href: (ProjectUrl + "/")}
-        )}
+              [
+                  {name:"Listes des offres d’emplois",href: (ProjectUrl + "/list-job")},
+                  {name:"Applications par",href: (ProjectUrl + "/application")}
+              ],
+              {name:"Offre d’emploi",href: (ProjectUrl + "/")}
+          )}
         {
             
         <div className=" contereAllLanding d-flex flex-column bd-highlight " >
@@ -91,11 +83,14 @@ import { number } from 'yup/lib/locale';
                 <div className="p-2 landing-list">
 
                         <p id='actu' className="landing-list-text">VOICI LES OFFRES D'ACTUALITE</p> 
+
+
+                    <div className="landingSelection">
                         <p>
                             <div className="dataTable-dropdown">
                                 <label>
                                 nombre offres: 
-                                    <select className="dataTable-selector">
+                                    <select className="dataTable-selector landingSelect">
                                     <option value="5" onClick={() => setValuNumbur(5)} selected>
                                         5
                                     </option>
@@ -120,7 +115,7 @@ import { number } from 'yup/lib/locale';
                             <div className="dataTable-dropdown">
                                 <label>
                                 Domaine: 
-                                    <select className="dataTable-selector">
+                                    <select className="dataTable-selector landingSelect">
                                     <option value="5" onClick={() => setDomaine(null)} selected>
                                         tout
                                     </option>
@@ -134,6 +129,11 @@ import { number } from 'yup/lib/locale';
                                 </label>
                             </div>
                         </p>
+                    </div>
+
+
+
+
 
                     <div  className="landing-list-children1">
                         
