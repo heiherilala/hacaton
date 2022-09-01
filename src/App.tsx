@@ -4,23 +4,17 @@ import "./style/main.css";
 import "bootstrap-css-only/css/bootstrap.min.css"
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import { ApplicationList, ListJob, Landing, Login } from "./pages";
+import { BooksClass, Landing, Login, Ranking } from "./pages";
 import { Profile, Register } from "./components";
-import { newApplication, newJobOffer } from "./constants";
-import { getCurrentUser } from "./hoooks";
+import { newJobOffer } from "./constants";
 
 function App() {
-  const [myToken,setMyToken] = useState<string>();
+  const [myToken,setMyToken] = useState<string>()
   const [activUpdat, setActivUpdat] = useState<boolean>(false);
-  const [idOffres, estIdOffres]= useState<number>(4);
-  useEffect(() => {
-    const user = getCurrentUser();
-    if (user) {
-      const subtitutionValue:string =  user.accessToken
-      setMyToken(subtitutionValue);
-    }
-  }, []);
 
+  const userStr = localStorage.getItem("user");
+  let user = null;
+  if (userStr)user = JSON.parse(userStr);
 
   const actualisationAllData = ()=>{
 
@@ -55,12 +49,12 @@ function App() {
                       </>
                     }
                 />
-                <Route path="/application" 
+                <Route path="/Ranking" 
                     element={
                       <>
-                        {<ApplicationList 
-                          items={[newApplication]} //book[];
-                          id={idOffres} //() => void;
+                        {<Ranking 
+                          items={[newJobOffer]} //book[];
+                          actualisationAllData={actualisationAllData} //() => void;
                           setActivUpdat={setActivUpdat} //React.Dispatch<React.SetStateAction<boolean>>;
                         />}
                       </>
@@ -69,7 +63,7 @@ function App() {
                 <Route path="/list-job" 
                     element={
                       <>
-                        {<ListJob 
+                        {<BooksClass 
                           items={[newJobOffer]} //book[];
                           actualisationAllData={actualisationAllData} //() => void;
                           setActivUpdat={setActivUpdat} //React.Dispatch<React.SetStateAction<boolean>>;

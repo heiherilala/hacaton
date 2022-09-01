@@ -66,9 +66,8 @@ export const LigneList:React.FC<props> = (props) => {
                         <div className="btn-group mr-2" role="group" aria-label="First group">
                             {bouttons.map((boutton)=>{return(
                                 ((boutton.name=="disponible"&&item.available)||(boutton.name!="disponible"&&!item.available))?
-                                <button onClick={()=>{setActivModif(true);}} type="button" className={"btn custom_color_1"}>{boutton.name}</button>:
-                                <button onClick={()=>{setActivModif(true);}} type="button" disabled className={"btn custom_color_2"}>{boutton.name}</button>
-                                
+                                <button onClick={()=>{setActivModif(true);}} type="button" disabled className={"btn custom_color_2"}>{boutton.name}</button>:
+                                <button onClick={()=>{setActivModif(true);}} type="button" className={"btn custom_color_1"}>{boutton.name}</button>
                             )})}
                         </div>
                     </td>:<></>
@@ -101,7 +100,7 @@ export const LigneList:React.FC<props> = (props) => {
                 }
             }
             />:<></>}
-                {activModifPut?<div className='fonds3'><FormulaireAddOffre
+            {activModifPut?<div className='fonds3'><FormulaireAddOffre
                 joboffer = {item} //: joboffer | undefined;
                 id = {idLine} //:number | null;
                 fermetur = {finishLoadingt} //:()=>void;

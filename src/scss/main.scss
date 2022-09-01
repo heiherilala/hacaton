@@ -7,11 +7,27 @@
 }
 .contereAllLanding{
   @include dispay-flex(column, start);
-  width: 100vw;
+  
 }
+
+
+.contereAllLoginb > h1{
+  font-weight: bold;
+  position: absolute;
+  top: 12%;
+}
+.contereAllLoginb .section-btn{    
+  position: absolute;
+  top: 70%;
+  color: #252222;
+  border: 1px solid #252222;
+  
+}
+
+
 .landing-list{
   @include dispay-flex(column, center);
-  background-color: $color_background_ligtht;
+  background-color: rgb(241, 241, 241)/*$color_background_ligtht*/;
   color: color_font($color_background_ligtht) !important;
   
   width: 100%;
@@ -29,27 +45,58 @@
 }
 .landing-list-children2{
   @include dispay-flex(column, start);
-  height: 20em;
+  min-height: 20em;
   margin: 1em !important;
   padding: 1em!important;
-  background-color: rgb(208, 212, 216);
+  background-color: #ece4de;
   
   width: 20%;
   min-width: 280px;
   /*border: 1px black solid;*/
-  border-radius: 10px
+  border-radius: 10px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+}
+.landing-list-children2:hover{
+  
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.landing-list-children2:hover button{
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
 }
 .landing-list-children2 h3{
   font-weight: bolder;
-  margin: 0.5em 0em;
+  padding-bottom: .25em;
+  border-bottom:2.5px solid rgb(165, 161, 161);
 }
 .landing-list-children2 > div{
   
   width: 100%;
   height: 100%;
+  min-height: 20em;
 }
-.landing-list-children2 button{
-  
+.card_en-tete { 
+  height: 20%;
+  min-height: 4em;
+}
+.card_body { 
+  height: 65%;
+  min-height: 13em;
+}
+.card_foot { 
+  height: 13%;
+  min-height: 2em;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -57,7 +104,7 @@
   @include dispay-flex(column, center);
   font-size: 3em;
   margin: 0.5em !important;
-  background-color: rgb(151, 161, 165);
+  background-color: #ece4de;
   border: 1px rgb(175, 170, 170) solid;
   border-radius: 10px
 }
@@ -89,8 +136,9 @@
   
   .custom_color_accept{
     @include button-color-accepted();
-    
+    font-weight: bolder
   }
+  
   
   
   .custom_color_refuse{
@@ -101,6 +149,24 @@
     margin-left: 1em;
   }
 
+  .section-btn {
+    background: transparent;
+    border-radius: 50px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-size: inherit;
+    font-weight: normal;
+    padding: 15px 30px;
+    transition: 0.5s;
+  }
+
+  .section-btn:hover {
+    background: #ffffff;
+    border-color: transparent;
+  }
+  .section-btn:hover {
+    text-decoration: none;
+  }
   
   /*--------------------------------------------Navbar*/
   
@@ -127,6 +193,15 @@
     background-color: $color_variant_light;
     color: white !important;
     margin-bottom: 0%;
+    display: inline-block!important;
+    position: fixed!important;
+    top: 0!important;
+    right: 0!important;
+    left: 0!important;
+    z-index: 1030!important;
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
   }
   .nav_perso a{
     padding: 0.2em 1.2em;
@@ -138,15 +213,49 @@
     margin: 0.2em 0.4em;
     /*color: white!important;*/
     border-radius: 50px;
+    
+    
   }
   .nav_perso li:hover{
     background-color: $color_variant_standard;
   }
   
   
+  .my-2{
+    position: fixed!important;
+    display: inline-block!important;
+    top: .5em!important;
+    right: 5px!important;
+    z-index: 1040!important;
+  }
   
+  .navbar-toggler{
+    position: fixed!important;
+    display: inline-block!important;
+    top: .5em!important;
+    right: 5px!important;
+    z-index: 1040!important;
+  }
   
-  
+/*footer*/
+#footer{
+  background-color: #252222;
+  width: 100%;
+  margin-bottom: 0;
+  color: #ece4de;
+  text-align: center;
+}
+footer a,
+  footer p {
+    color: #b9b8b8;
+  }
+
+  .footer-content{
+    margin-top: 1em;
+
+  }
+
+
   /*----------------------------Loading*/
   
   
@@ -220,6 +329,11 @@
     z-index: 1;
   }
   
+  .formulaire_candidat_info{
+    background-color: #a18080;
+    border-radius: 10px;
+    margin: 1em;
+  }
   
   .form_fondsDrink {
     z-index: 1100;
@@ -257,9 +371,7 @@
   .form_contenu {
      min-height: 80px;
      width: 400px;
-     
   }
-  
   .form_contenu p {
     margin-top: 5px;
     margin-bottom: 15px;
@@ -337,7 +449,6 @@
     cursor: pointer;
   }
   
-  
   .bigText{
    unicode-bidi: bidi-override !important;
   }
@@ -354,15 +465,18 @@
     align-items: center;
   }
   
+  
   .titleLoging{
     font-weight: bolder!important;
     margin-top: 1.5em;
     margin-bottom: 1em;
     display: flex;
     justify-content: center;
+    
   }
   
   .connexion{
+    /*filter: brightness(100%)!important;*/
     max-width: 640px;
     width: 40em;
     height: 20em;
@@ -395,26 +509,27 @@
   
   
   .liste_tab{
-    min-width: 1000px;
+    position: relative;
+    min-width: 1100px;
   width: 60em;
   min-height: 20em;
   padding: 1em;
   background-color: white;        
         left: 0;
         right: 0;
-        top: 0;
-        bottom: 0;
+        top: 5em;
+        bottom: 2em;
         margin: auto;
         max-width: 100%;
   border-radius: 1em;
   box-shadow: $color_shadow 0 8px 16px 8px;;
   }
   
-  .background_gray{
+  /*.background_gray{
     background-color: $color_background_ligtht;
     width: 100vw;
     height: 100vh;
-  }
+  }*/
 
 
 

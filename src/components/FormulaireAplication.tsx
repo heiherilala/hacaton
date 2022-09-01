@@ -1,5 +1,5 @@
 
-import { Field, useFormik } from "formik";
+import { Field, FieldArray, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { APIUrl, backgroundColor } from "../constants";
@@ -56,7 +56,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
       <>
           <div className="">
             <div className="">
-              {'      '}<h3 className="titre_formulaire">Information sur vous</h3>
+              {'      '}<h3 className="">Information sur vous</h3>
             </div>
             <form
               action=""
@@ -64,6 +64,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
               onSubmit={formik.handleSubmit}
               onReset={formik.handleReset}
             >
+              <div className="row">
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
                   Votre nom:
@@ -79,9 +80,28 @@ const FormulaireAplication: React.FC<props> = (props) => {
                 {formik.errors.nameAplication ? (
                   <p> {formik.errors.nameAplication} </p>
                 ) : null}
+              </div>                         
               </div>
-
+              <div className="row">
               <div className="form_contenu">
+                <label htmlFor="id" className="label_input">
+                Votre profil:
+                </label>
+                <input
+                  
+                  id="profil"
+                  type="textarea"
+                  className="input_formulaire bigText"
+                  placeholder="profil"
+                  value={formik.values.profil}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.profil ? <p> {formik.errors.profil} </p> : null}
+              </div>                      
+              </div>
+              <div className="row">
+                <div className="col-6">
+                <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
                   Votre email:
                 </label>
@@ -95,34 +115,29 @@ const FormulaireAplication: React.FC<props> = (props) => {
                 />
                 {formik.errors.email ? <p> {formik.errors.email} </p> : null}
               </div>
-
-              <div className="form_contenu">
-                <label htmlFor="id" className="label_input">
-                Votre profil:
-                </label>
-                <input
-                  id="profil"
-                  type="textarea"
-                  className="input_formulaire bigText"
-                  placeholder="profil"
-                  value={formik.values.profil}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.profil ? <p> {formik.errors.profil} </p> : null}
+                </div>     
+                <div className="col-6">
+                  <div className="form_contenu">
+                  <label htmlFor="id" className="label_input">
+                    Prétention salariale (Ar)
+                  </label>
+                  <input
+                    id="salary"
+                    type="text"
+                    className="input_formulaire"
+                    placeholder="salariale"
+                    value={formik.values.salary}
+                    onChange={formik.handleChange}
+                  />
+                </div>           
               </div>
+              
 
-              <div className="form_contenu">
-                <label htmlFor="id" className="label_input">
-                  Votre prétention salariale:(en Ariary)
-                </label>
-                <input
-                  id="salary"
-                  type="text"
-                  className="input_formulaire"
-                  placeholder="salariale"
-                  value={formik.values.salary}
-                  onChange={formik.handleChange}
-                />
+              
+
+              
+
+              
                 {formik.errors.salary ? <p> {formik.errors.salary} </p> : null}
               </div>
                 

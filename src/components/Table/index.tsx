@@ -33,8 +33,7 @@ export const TableConstructor: React.FC<props> = (props) => {
   const [page, setPage] = useState<number>(1);
   const [activUpdatePost,setActivUpdatePost]= useState<boolean>(false)
   const [myToken,setMyToken] = useState<string>()
-  const [stringPage, setStringPage] = useState("120");
-  const [longPage, setLongPage] = useState<number>(0);
+  const [longPage, setLongPage] = useState<number>(105);
   const [loadlongPage, setloadLongPage] = useState<number>(0);
   const [dataJobOffer, setDataJobOffer] = useState<any[]>([newJobOffer]);
   const [loagJobOffer, setLoagJobOffer] = useState<number>(0);
@@ -48,7 +47,7 @@ export const TableConstructor: React.FC<props> = (props) => {
   useEffect(() => {
     const user = getCurrentUser();
     if (user) {
-      const subtitutionValue:string =  user.accessToken;
+      const subtitutionValue:string =  user.accessToken
       setMyToken(subtitutionValue);
     }
   }, []);
@@ -64,8 +63,7 @@ export const TableConstructor: React.FC<props> = (props) => {
   }, [loadDataCompose])
 
   useEffect(() => {
-    axiosGget("/job-offers/count",myToken,setStringPage,null,null)
-    setLongPage(Number(stringPage));
+    axiosGget("/job-offers/count",myToken,setLongPage,null,null)
   }, [loadlongPage])
 
 

@@ -1,8 +1,8 @@
 
-import ListJob from "./ListJob";
+import BooksClass from "./BooksClass";
 import Landing from "./Landing";
 import Login from "./Login";
-import ApplicationList from "./ApplicationList";
+import Ranking from "./Ranking";
 
 
 
@@ -10,5 +10,5 @@ import ApplicationList from "./ApplicationList";
 
 
 
-export {ApplicationList,Login,ListJob,Landing}
+export {Ranking,Login,BooksClass,Landing}
 

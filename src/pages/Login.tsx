@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { NavbarHeader } from '../components';
 import { ProjectUrl, variant } from '../constants';
-import background from "./../assets/images/KOLORO_1661547966914.jpg";
+import background from "./../assets/images/pexels-rodnae-productions-7841410.jpg";
 import React, { useEffect, useRef, useState } from "react";
 import { ErrorMessage } from 'formik';
 import { getCurrentUser, login, logout } from '../hoooks';
@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { IUser } from '../interfaces';
 import EventBus from '../hoooks/EventBus';
 import { Field, useFormik } from "formik";
-import Ranking from './ApplicationList';
+import Ranking from './Ranking';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ import axios from 'axios';
 
 
   const navigate = ()=>{
-    window.location.href=(ProjectUrl+"/application");
+    window.location.href=(ProjectUrl+"/Ranking");
   }
 
 
@@ -60,6 +60,7 @@ import axios from 'axios';
           backgroundImage: 'url('+background+')',
           backgroundSize: "cover",
           height: "100vh",
+          
         }}>
             <div className='connexion'>
               

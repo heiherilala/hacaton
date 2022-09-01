@@ -74,7 +74,7 @@ const NavbarHeaderView = (navList:{name:string,href:string}[],title:{name:string
                 <form className="form-inline my-2 my-lg-0">
                   {currentUser ? (
                     <div className="navbar-nav ml-auto">
-                      <li className="nav-item my-2 my-sm-0 custom_color_logout">
+                      <li className="nav-item  my-sm-0 custom_color_logout">
                         <Link to={"/user"} className="nav-link">
                           {currentUser.username}
                         </Link>
