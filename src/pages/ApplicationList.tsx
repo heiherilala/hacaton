@@ -7,7 +7,7 @@ import { Application } from '../interfaces';
 
 interface props{
     items: Application[];
-    actualisationAllData:() => void;
+    id:number;
     setActivUpdat: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
@@ -16,6 +16,7 @@ const ApplicationList: React.FC<props> = (props) => {
   const [items, setItems] = useState(props.items);
   const [offerActiv, setOfferActiv] = useState(newJobOffer);
   const [myToken,setMyToken] = useState<string>()
+  const [id,setId] = useState<number>(props.id)
   useEffect(() => {
     const user = getCurrentUser();
     if (user) {
@@ -27,13 +28,13 @@ const ApplicationList: React.FC<props> = (props) => {
   useEffect(() => {
     changeItemt();
     changeOffre();
-  }, []);
+  }, [id]);
 
   const changeOffre = ()=>{
-    axiosGget("/job-offers/1",myToken,setOfferActiv,null,null)
+    axiosGget("/job-offers/"+id,myToken,setOfferActiv,null,null)
   }
   const changeItemt = ()=>{
-    axiosGget("/job-offers/1/applications",myToken,setItems,null,null)
+    axiosGget("/job-offers/"+id+"/applications",myToken,setItems,null,null)
   }
 
 

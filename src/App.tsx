@@ -7,14 +7,20 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { ApplicationList, ListJob, Landing, Login } from "./pages";
 import { Profile, Register } from "./components";
 import { newApplication, newJobOffer } from "./constants";
+import { getCurrentUser } from "./hoooks";
 
 function App() {
-  const [myToken,setMyToken] = useState<string>()
+  const [myToken,setMyToken] = useState<string>();
   const [activUpdat, setActivUpdat] = useState<boolean>(false);
+  const [idOffres, estIdOffres]= useState<number>(4);
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) {
+      const subtitutionValue:string =  user.accessToken
+      setMyToken(subtitutionValue);
+    }
+  }, []);
 
-  const userStr = localStorage.getItem("user");
-  let user = null;
-  if (userStr)user = JSON.parse(userStr);
 
   const actualisationAllData = ()=>{
 
@@ -54,7 +60,7 @@ function App() {
                       <>
                         {<ApplicationList 
                           items={[newApplication]} //book[];
-                          actualisationAllData={actualisationAllData} //() => void;
+                          id={idOffres} //() => void;
                           setActivUpdat={setActivUpdat} //React.Dispatch<React.SetStateAction<boolean>>;
                         />}
                       </>
