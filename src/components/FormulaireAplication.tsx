@@ -1,12 +1,12 @@
 
-import { Field, useFormik } from "formik";
+import { Field, FieldArray, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { APIUrl, backgroundColor } from "../constants";
-import { Application } from "../interfaces";
+import { Application, JobOffer } from "../interfaces";
 import { postPutDeletRequest } from "../hoooks";
 interface props {
-  item:Application;
+  item:JobOffer;
   fermetur:()=>void;
   token:string|undefined
 }
@@ -37,16 +37,19 @@ const FormulaireAplication: React.FC<props> = (props) => {
     }),
     onSubmit: (values) => {
       const newDate = new Date;
-
+      console.log(props.item);
+      
       const objectData = {
         candidateName: values.nameAplication,
         email: values.email,
         salary: values.salary,
         profile: values.profil,
         dateApplication: newDate.getDate.toString,
-        jobOffer:{idJobOffer:props.item.jobOffer?.idJobOffer}
+        jobOffer:{idJobOffer:props.item.idJobOffer},
       };
+      try{
         postPutDeletRequest("/job-offers",objectData,null,true,false,()=>fermerFormulaire(),()=>fermerFormulaire(),props.token);
+      } catch (error){};
     },
   });
 
@@ -56,7 +59,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
       <>
           <div className="">
             <div className="">
-              {'      '}<h3 className="titre_formulaire">Information sur vous</h3>
+              {'      '}<h3 className="">Information sur vous</h3>
             </div>
             <form
               action=""
@@ -64,6 +67,7 @@ const FormulaireAplication: React.FC<props> = (props) => {
               onSubmit={formik.handleSubmit}
               onReset={formik.handleReset}
             >
+              <div className="row">
               <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
                   Votre nom:
@@ -79,9 +83,28 @@ const FormulaireAplication: React.FC<props> = (props) => {
                 {formik.errors.nameAplication ? (
                   <p> {formik.errors.nameAplication} </p>
                 ) : null}
+              </div>                         
               </div>
-
+              <div className="row">
               <div className="form_contenu">
+                <label htmlFor="id" className="label_input">
+                Votre profil:
+                </label>
+                <input
+                  
+                  id="profil"
+                  type="textarea"
+                  className="input_formulaire bigText"
+                  placeholder="profil"
+                  value={formik.values.profil}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.profil ? <p> {formik.errors.profil} </p> : null}
+              </div>                      
+              </div>
+              <div className="row">
+                <div className="col-6">
+                <div className="form_contenu">
                 <label htmlFor="id" className="label_input">
                   Votre email:
                 </label>
@@ -95,35 +118,23 @@ const FormulaireAplication: React.FC<props> = (props) => {
                 />
                 {formik.errors.email ? <p> {formik.errors.email} </p> : null}
               </div>
-
-              <div className="form_contenu">
-                <label htmlFor="id" className="label_input">
-                Votre profil:
-                </label>
-                <input
-                  id="profil"
-                  type="textarea"
-                  className="input_formulaire bigText"
-                  placeholder="profil"
-                  value={formik.values.profil}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.profil ? <p> {formik.errors.profil} </p> : null}
+                </div>     
+                <div className="col-6">
+                  <div className="form_contenu">
+                  <label htmlFor="id" className="label_input">
+                    Prétention salariale (Ar)
+                  </label>
+                  <input
+                    id="salary"
+                    type="text"
+                    className="input_formulaire"
+                    placeholder="salariale"
+                    value={formik.values.salary}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.salary ? <p> {formik.errors.salary} </p> : null}
+                </div>           
               </div>
-
-              <div className="form_contenu">
-                <label htmlFor="id" className="label_input">
-                  Votre prétention salariale:(en Ariary)
-                </label>
-                <input
-                  id="salary"
-                  type="text"
-                  className="input_formulaire"
-                  placeholder="salariale"
-                  value={formik.values.salary}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.salary ? <p> {formik.errors.salary} </p> : null}
               </div>
                 
               <button className={"btn_envoie btn_type "} onClick={()=>{props.fermetur()}}>

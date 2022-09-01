@@ -2,11 +2,12 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { newApplication, newJobOffer, ProjectUrl} from '../constants';
-import background from "./../assets/images/KOLORO_1661547966914.jpg";
+import background from "./../assets/images/pexels-andrea-piacquadio-3760067.jpg";
 import { useEffect, useRef, useState } from "react";
 import { axiosGetWithPage, login } from '../hoooks';
 import { ConfirmAplication, NavbarHeader } from '../components';
 import { Application, JobOffer } from '../interfaces';
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,7 +33,7 @@ import { Application, JobOffer } from '../interfaces';
 
 
   const navigate = ()=>{
-    window.location.href=(ProjectUrl+"/application");
+    window.location.href=(ProjectUrl+"/Ranking");
   }
 
   const functionLog = (username:string, password:string) => {
@@ -53,20 +54,28 @@ import { Application, JobOffer } from '../interfaces';
     <>
         {NavbarHeader(
             [
-                {name:"Listes des offres",href: (ProjectUrl + "/list-job")},
-                {name:"Listes des candidatures",href: (ProjectUrl + "/application")}
+                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/BooksClass")},
+                {name:"Listes des offres d’emploi",href: (ProjectUrl + "/Ranking")}
             ],
             {name:"Offre d’emploi",href: (ProjectUrl + "/")}
         )}
         {
-        <div className=" contereAllLanding d-flex flex-column bd-highlight mb-3" >
-
-
+            
+        <div className=" contereAllLanding d-flex flex-column bd-highlight " >
+            <div className="contereAllLoginb" style={{
+                backgroundImage: 'url('+background+')',
+                backgroundSize: "cover",
+                height: "100vh",
+                
+              }}>
+                <h1>Vous cherchez un emploi ?</h1>
+                <a className='section-btn' href='#actu'>Consulter nos offres</a>
+            </div>
                 <div className="p-2 landing-list">
 
-                        <p className="landing-list-text">VOUS ETES A LA RECHERCHE D'emploi? VOICI LES OFFRES D'ACTUALITE</p>
+                        <p id='actu' className="landing-list-text">VOICI LES OFFRES D'ACTUALITE</p>
 
-                    <div className="landing-list-children1">
+                    <div  className="landing-list-children1">
                         <button className="landing-list-children2-move">
                             <i className="bi bi-chevron-compact-left"></i>
                         </button>
@@ -75,7 +84,7 @@ import { Application, JobOffer } from '../interfaces';
                                 <ConfirmAplication item={data}/>
                             </div>
                         )})}
-                        <button className="landing-list-children2-move">
+                        <button  className="landing-list-children2-move">
                             <i className="bi bi-chevron-compact-right"></i>
                         </button>
                     </div>
@@ -85,28 +94,27 @@ import { Application, JobOffer } from '../interfaces';
                 </div>
                 <div className="p-2 landing-list">
                     <p>VOUS ETES RECRUTEURS? CONTACTEZ-NOUS POUR QUE NOUS METTONS EN AVANT VOTRE OFFRE</p>
-                    <div className="landing-list2-children1">
-                        <div className="landing-list2-children2">
-                            <h2>TELEPHONE</h2>
-                            <div>Mobile1: +261 33 12 345 64</div>
-                            <div>Mobile1: +261 34 12 345 64</div>
-                            <div>Mobile1: +261 22 12 345 64</div>
-                        </div>
-                        <div className="landing-list2-children2">
-                            <h2>EMAIL</h2>
-                            <div>nyainaheri@gmail.com</div>
-                            <div>lova@gmail.com</div>
-                            <div>unbon@gmail.com</div>
-                        </div>
-                        <div className="landing-list2-children2">
-                            <h2>ADRESSE</h2>
-                            <div>Batiment Ivandry, 101 Antananarivo</div>
-                            <div>Madagascar</div>
-                        </div>
-                    </div>
+                    
                 </div>
 
+                <footer id="footer">
+          <div className="container">
+               <div className="row">
 
+                    <div className="col">
+                         <div className="footer-info">
+                              <div className="footer-content"><p> Entreprise de recrutement</p></div>
+                              <div className="copyright-text"> 
+                                   <p > &copy; HEI - SARLU</p>                                
+                              </div>        
+                                                            
+                              <p >Email: <a href="mailto:contact@hei.school">contact@hei.school</a> • Tel: +261 34 94 041 16 • <a href="https://www.google.com/maps/place/Haute+School+It+%5BHei%5D/@-18.8707638,47.5347298,15z/data=!4m5!3m4!1s0x0:0x73f917bb47615aa0!8m2!3d-18.8707923!4d47.5347803" target="_blank">2J 161R Ivandry, Antananarivo</a></p>
+                         </div>
+                    </div>                                      
+                    
+               </div>
+          </div>
+     </footer>
         </div>
         }
     </>

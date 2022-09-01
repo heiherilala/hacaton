@@ -59,5 +59,5 @@ export interface Application {
      * @type {JobOffer}
      * @memberof Application
      */
-    jobOffer?: JobOffer;
+    jobOffer: JobOffer;
 }
