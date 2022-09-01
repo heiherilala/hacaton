@@ -22,7 +22,7 @@ export interface Domain {
      * @type {number}
      * @memberof Domain
      */
-    idDomain?: number;
+    idDomain: number;
     /**
      * 
      * @type {string}
